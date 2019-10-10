@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "900D4710DF4EF761F9D47EE2E9692F5DBE819F9B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "900D4710DF4EF761F9D47EE2E9692F5DBE819F9B" : 9223372036854775807,
+    "F024B372FCFF470DA20DD02157DAACC2E58B7655" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0F6CB7F8-73EC-4F10-BA25-8DBA2F6CE10D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "900D4710DF4EF761F9D47EE2E9692F5DBE819F9B" : "final\/",
+    "F024B372FCFF470DA20DD02157DAACC2E58B7655" : "final\/eShop\/bcrypt\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "eShop",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "eShop\/eShop.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/uchicago-mobi\/mpcs51030-2017-summer-assignment-final-project-majonathany.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "900D4710DF4EF761F9D47EE2E9692F5DBE819F9B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/bcrypt.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F024B372FCFF470DA20DD02157DAACC2E58B7655"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ShoppingCollectionViewController.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ShoppingCollectionViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ShoppingCollectionViewController.loadData() -&gt; ():ShoppingCollectionViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "main:AppDelegate.swift">
+      </ContextState>
+      <ContextState
+         contextName = "User.init(coder : NSCoder) -&gt; User?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "aDecoder.decodeObject(forKey: &quot;passwordHash&quot;) as? String">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.encode(with : NSCoder) -&gt; ():User.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CartTableViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:CartTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "listOfPokemon">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SignUpViewController.submit(UIButton) -&gt; ():SignUpViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSKeyedArchiver.archivedData(withRootObject: userHash)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CartTableViewController.purchase(UIBarButtonItem) -&gt; ():CartTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.currentUser.name == userList[0].name &amp;&amp; User.currentUser.firstMonth == userList[0].firstMonth &amp;&amp; User.currentUser.firstDay == userList[0].firstDay &amp;&amp; User.currentUser.firstYear == userList[0].firstYear">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ShoppingCollectionViewController.collectionView(UICollectionView, cellForItemAt : IndexPath) -&gt; UICollectionViewCell:ShoppingCollectionViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SignInController.signIn(UIButton) -&gt; ():SignInController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
