@@ -22,20 +22,7 @@ class SignInController: UIViewController
     // Do any additional setup after loading the view, typically from a nib.
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-      if user != nil{
-        self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        self.emailField.text = "Email Address"
-        self.passwordField.text = "Password"
-      }
-    }
-  }
-  
-  override func viewWillDisappear(_ animated: Bool)
-  {
-    Auth.auth().removeStateDidChangeListener(handle!)
-  }
+
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -66,6 +53,12 @@ class SignInController: UIViewController
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         
         self.present(alert, animated: true, completion: nil)
+      }
+      else
+      {
+        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        self.emailField.text = "Email Address"
+        self.passwordField.text = "Password"
       }
       
     }

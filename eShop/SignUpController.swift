@@ -13,6 +13,7 @@ class SignUpController: UIViewController {
   
   //MARK: Properties
   
+  
   @IBOutlet weak var signupUsername: UITextField!
   @IBOutlet weak var signUpPassword: UITextField!
   @IBOutlet weak var signupConfirmPassword: UITextField!
@@ -23,7 +24,6 @@ class SignUpController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool){
     
-    Auth.auth().removeStateDidChangeListener(handle!)
   }
   
   override func viewDidLoad() {
@@ -32,6 +32,11 @@ class SignUpController: UIViewController {
     
     // Do any additional setup after loading the view.
   }
+  
+  @IBAction func cancel(_ sender: Any) {
+    self.dismiss(animated: true)
+  }
+  
   
   @IBAction func signUp(_ sender: Any)
   {
@@ -65,6 +70,7 @@ class SignUpController: UIViewController {
         
         return
       }
+
       
       //MARK: Schema
       
@@ -92,6 +98,14 @@ class SignUpController: UIViewController {
       
       let usersRef = Firestore.firestore().collection("dbUsers")
       usersRef.document(user.uid).setData(userSchema)
+      
+      let alert = UIAlertController(title: "Congratulations",
+                                    message: "You successfully created an account. Please login.",
+                                    preferredStyle: .alert)
+      
+      alert.addAction(UIAlertAction(title: "OK", style: .default) {(_) in self.dismiss(animated:true)})
+
+      self.present(alert, animated: true)
     }
   }
   

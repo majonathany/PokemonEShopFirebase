@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D16BD7F234A7B820014C884 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16BD7E234A7B820014C884 /* SignUpController.swift */; };
+		1D8D591123512B8B00457869 /* ItemCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D591023512B8B00457869 /* ItemCollectionViewCellDelegate.swift */; };
 		1DFCA25323372FC700072EC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DFCA25223372FC700072EC1 /* GoogleService-Info.plist */; };
 		C20CDCC31F4AC8AF00B169DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20CDCC21F4AC8AF00B169DC /* AppDelegate.swift */; };
 		C20CDCC51F4AC8AF00B169DC /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20CDCC41F4AC8AF00B169DC /* SignInController.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		1D16BD7E234A7B820014C884 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		1D7F8474233829E10033D6D5 /* BCryptSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCryptSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D8D591023512B8B00457869 /* ItemCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
 		1D9E1F9923296F7E00B81E2C /* eShop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eShop.entitlements; sourceTree = "<group>"; };
 		1DFCA25223372FC700072EC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75992FB52FABC89F62B001DA /* Pods-eShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eShop.release.xcconfig"; path = "Target Support Files/Pods-eShop/Pods-eShop.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				1D16BD7E234A7B820014C884 /* SignUpController.swift */,
 				C27BA4561F4F312000AA773C /* UserOrderTableViewCell.swift */,
 				CB335E883795BD2E11B7B9C9 /* UserOrderTableViewController.swift */,
+				1D8D591023512B8B00457869 /* ItemCollectionViewCellDelegate.swift */,
 			);
 			path = eShop;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D8D591123512B8B00457869 /* ItemCollectionViewCellDelegate.swift in Sources */,
 				C22AF8771F4C05B700B4DA9B /* ShoppingCollectionViewController.swift in Sources */,
 				C20CDCC51F4AC8AF00B169DC /* SignInController.swift in Sources */,
 				C27BA4521F4F2F0500AA773C /* HelpViewController.swift in Sources */,

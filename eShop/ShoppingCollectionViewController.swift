@@ -12,58 +12,117 @@ import FirebaseStorage
 
 private let reuseIdentifier = "ItemCollectionViewCell"
 
-class ShoppingCollectionViewController: UICollectionViewController
+class ShoppingCollectionViewController: UICollectionViewController, ItemCollectionViewCellDelegate
 {
+  var itemsCache: [String]?
   
-  var listOfItems: [String]?
   var handle: AuthStateDidChangeListenerHandle?
   var storage = Storage.storage()
+  var cartDocument: DocumentReference?
+  
+  let pokemonRef = Firestore.firestore().collection("pokemon")
+
+  let usersRef = Firestore.firestore().collection("dbUsers")
+  var userID: String?
+  var userDoc: DocumentReference?
+  var userData: [String: Any]?
+  
+  var cartID: String?
+  var cartDoc: DocumentReference?
+  var cartData: [String: Any]?
+  var cartCache: [String: Int]?
   
   override func viewWillAppear(_ animated: Bool)
   {
     handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-
+      guard let user = user else
+      {
+        self.dismiss(animated: true)
+        return
+      }
       
+      self.userID = user.uid
+      self.userDoc = self.usersRef.document(self.userID!)
+      self.userDoc!.getDocument { (userDocument, error) in
+        guard let userDocument = userDocument, userDocument.exists else
+        {
+          let alert = UIAlertController(
+            title: "Firebase Problem",
+            message: "There is a problem loading the user's document from the database.",
+            preferredStyle: .alert)
+          
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          
+          self.present(alert, animated: true, completion: nil)
+          return
+        }
+        
+        self.cartID = userDocument.data()!["cartID"] as? String
+        self.cartDoc = Firestore.firestore().collection("carts").document(self.cartID!)
+        self.cartDoc!.getDocument{ (cartDocument, cartError) in
+          guard let cartDocument = cartDocument, cartDocument.exists else
+          {
+            self.cartData = [
+              "items": [:],
+              "postedBy": self.userID!
+            ]
+            self.cartDoc?.setData(self.cartData!)
+            self.cartCache = [:]
+            return
+          }
+          self.cartData = cartDocument.data()
+          self.cartCache = self.cartData!["items"] as? [String: Int]
+          
+        }
+      }
     }
-    
-    
   }
   override func viewWillDisappear(_ animated: Bool)
   {
+    if self.cartCache != nil
+    {
+      self.cartDoc!.updateData(["items":
+        self.cartCache!])
+    }
     Auth.auth().removeStateDidChangeListener(handle!)
   }
   
   
   override func viewDidLoad() {
    
-    if (listOfItems == nil)
-    {
-      listOfItems = []
-      let pokemonRef = Firestore.firestore().collection("pokemon")
-      
-      pokemonRef.getDocuments { (querySnapshot, err) in
-        if let err = err {
-          print("Error getting documents: \(err)")
-        }
-        else
-        {
-          for document in querySnapshot!.documents {
-            self.listOfItems!.append(document.documentID)
-          }
-          self.collectionView?.reloadData()
-        }
-      }
-    }
     
     super.viewDidLoad()
-    self.collectionView!.alwaysBounceVertical = true
     
+    self.collectionView!.alwaysBounceVertical = true
     let rc = UIRefreshControl()
     rc.addTarget(self, action: #selector(ShoppingCollectionViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+    self.collectionView!.addSubview(rc)
+    
+    
+    self.itemsCache = []
+    self.loadData()
+  }
+
+  private func loadData()
+  {
+    pokemonRef.getDocuments { (querySnapshot, err) in
+      if let err = err {
+        print("Error getting documents: \(err)")
+      }
+      else
+      {
+        for document in querySnapshot!.documents {
+          self.itemsCache!.append(document.documentID)
+        }
+        self.collectionView!.reloadData()
+      }
+    }
   }
   
   @objc func handleRefresh(refreshControl: UIRefreshControl)
   {
+    refreshControl.beginRefreshing()
+    self.loadData()
     self.collectionView!.reloadData()
     refreshControl.endRefreshing()
   }
@@ -83,21 +142,16 @@ class ShoppingCollectionViewController: UICollectionViewController
   
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    print("collectionView() is called: \(listOfItems!.count)")
 
-      return listOfItems!.count
+    return self.itemsCache!.count
     
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ItemCollectionViewCell
     
-    
-    
-    let pokemonUID = listOfItems![indexPath.row]
-    
+    let pokemonUID = self.itemsCache![indexPath.row]
     let pokemonRef = Firestore.firestore().collection("pokemon")
-    
     let pokemonDoc = pokemonRef.document(pokemonUID)
     
     pokemonDoc.getDocument{ (document, error) in
@@ -110,6 +164,8 @@ class ShoppingCollectionViewController: UICollectionViewController
         cell.quantity.text = "\(0)"
         cell.stepper.stepValue = 1
         cell.stepper.minimumValue = 0
+        cell.delegate = self
+        cell.itemUID = pokemonDoc.documentID
                 
         let pathReference = self.storage.reference(forURL: "\(pokemonDict["imageURL"] as! String)")
                 
@@ -126,12 +182,35 @@ class ShoppingCollectionViewController: UICollectionViewController
         }
       }
     }
-    
     return cell
   }
   
+  func increment(_ uid: String)
+  {
+    if self.cartCache![uid] != nil
+    {
+      self.cartCache![uid]! += 1
+    }
+    else
+    {
+      self.cartCache![uid] = 1
+    }
+  }
   
-  
+  func decrement(_ uid: String)
+  {
+    if self.cartCache![uid] == nil
+    {
+      return
+    }
+    
+    if self.cartCache![uid]! > 0
+    {
+      self.cartCache![uid]! -= 1
+    }
+    if self.cartCache![uid]! == 0
+    {
+      self.cartCache?.removeValue(forKey: uid)
+    }
+  }
 }
-
-
