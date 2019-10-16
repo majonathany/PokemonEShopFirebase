@@ -30,6 +30,7 @@ class CartTableViewController: UITableViewController
   let storage = Storage.storage()
   
   override func viewWillDisappear(_ animated: Bool){
+    
     Auth.auth().removeStateDidChangeListener(handle!)
   }
   
@@ -78,9 +79,10 @@ class CartTableViewController: UITableViewController
       }
       
 
-      self.loadView()
     }
+    self.loadView()
     self.tableView.reloadData()
+    
   }
   
   override func viewDidLoad() {
@@ -170,6 +172,8 @@ class CartTableViewController: UITableViewController
       self.cartData = cartDocument.data()
       self.cartCache = self.cartData!["items"] as? [String: Int]
 
+      
+      
     }
     
     refreshControl.endRefreshing()
@@ -214,6 +218,8 @@ class CartTableViewController: UITableViewController
       "items": [:]
     ]) { err in
       guard let err = err else {
+        
+        
         let alertController = UIAlertController(title: "Status Message", message: "There has been no change in the cart. No action was taken.", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         
@@ -235,6 +241,8 @@ class CartTableViewController: UITableViewController
     
     self.userDoc!.updateData(["orders": FieldValue.arrayUnion([orderDoc.documentID])])
     self.tableView.reloadData()
+    
+    
   }
   
   

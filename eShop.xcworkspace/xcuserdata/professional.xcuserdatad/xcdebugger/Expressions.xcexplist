@@ -6,6 +6,9 @@
          contextName = "SignInController.signIn(_:):SignInController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
                value = "Auth.auth().currentUser!">
             </PersistentString>
          </PersistentStrings>

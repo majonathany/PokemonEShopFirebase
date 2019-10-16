@@ -187,6 +187,11 @@ class ShoppingCollectionViewController: UICollectionViewController, ItemCollecti
   
   func increment(_ uid: String)
   {
+    if self.cartCache == nil
+    {
+      self.cartCache = [:]
+    }
+    
     if self.cartCache![uid] != nil
     {
       self.cartCache![uid]! += 1

@@ -17,33 +17,43 @@ class SignInController: UIViewController
   
   var handle: AuthStateDidChangeListenerHandle?
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+    view.addGestureRecognizer(tap)
+    
+  }
+  @objc func dismissKeyboard() {
+    //Causes the view (or one of its embedded text fields) to resign the first responder status.
+    view.endEditing(true)
   }
   
-
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
-  @IBAction func signIn(_ sender: UIButton) {
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    if identifier == "loginSegue"
     
-    if (Auth.auth().currentUser?.email) != nil
     {
-      print(Auth.auth().currentUser?.email)
+      guard let email = emailField.text,
+        let password = passwordField.text,
+        email.count > 0,
+        password.count > 0
+        else {
+          return false
+      }
     }
-    guard let email = emailField.text,
-      let password = passwordField.text,
-      email.count > 0,
-      password.count > 0
-      else
-    {
-      return
-    }
-    Auth.auth().signIn(withEmail: email, password: password)
+    return true
+  }
+  
+  @IBAction func signIn(_ sender: Any) {
+    Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!)
     { user, error in
       if let error = error, user == nil {
         let alert = UIAlertController(title: "Sign In Failed",
@@ -54,15 +64,7 @@ class SignInController: UIViewController
         
         self.present(alert, animated: true, completion: nil)
       }
-      else
-      {
-        self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        self.emailField.text = "Email Address"
-        self.passwordField.text = "Password"
-      }
-      
     }
-    
   }
   
   @IBAction func unwindFromHelp(sender: UIStoryboardSegue)
